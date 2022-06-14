@@ -52,64 +52,66 @@ class SubCategoriesScreen extends StatelessWidget {
               },
             ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-            child: GridView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 1.5,
-              ),
+              // gridDelegate:
+              // SliverGridDelegateWithFixedCrossAxisCount(
+              //   crossAxisCount: 2,
+              //   crossAxisSpacing: 20,
+              //   mainAxisSpacing: 20,
+              //   childAspectRatio: 1.5,
+              // ),
               itemCount: pushedArguments['chosenCat'].subCategory.length,
               itemBuilder: (ctx, i) {
                 return Card(
                     elevation: 6.0,
-                    child: Center(
-                      child: ListTile(
-                        onTap: () {
-                          if (pushedArguments['newAd']) {
-                            Navigator.of(context)
-                                .pushNamed(NewAdScreen.routeName, arguments: {
-                              'chosenCat': pushedArguments['chosenCat'],
-                              'chosenSubCat':
-                              pushedArguments['chosenCat'].subCategory[i],
-                            });
-                          } else if (pushedArguments['editAd']) {
-                            Navigator.of(context)
-                                .pushNamed(EditAdScreen.routeName, arguments: {
-                              'chosenCat': pushedArguments['chosenCat'],
-                              'chosenSubCat':
-                              pushedArguments['chosenCat'].subCategory[i],
-                            });
-                          } else {
-                            Navigator.of(context).pushNamed(
-                                ProductsByCategoryScreen.routeName,
-                                arguments: {
-                                  'chosenCat': pushedArguments['chosenCat'],
-                                  'chosenSubCat':
-                                  pushedArguments['chosenCat'].subCategory[i],
-                                });
-                          }
-                        },
-                        leading:
-                        pushedArguments['chosenCat'].subCategory[i].picture !=
-                            null
-                            ? Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Image.network(
-                            pushedArguments['chosenCat'].subCategory[i].picture,
-                            width: 32,
-                            errorBuilder: (context, error, stackTrace) => Icon(
-                              Icons.warning_amber_rounded,
-                              size: 32,
+                    child: InkWell(
+                      onTap: () {
+                        if (pushedArguments['newAd']) {
+                          Navigator.of(context)
+                              .pushNamed(NewAdScreen.routeName, arguments: {
+                            'chosenCat': pushedArguments['chosenCat'],
+                            'chosenSubCat':
+                            pushedArguments['chosenCat'].subCategory[i],
+                          });
+                        } else if (pushedArguments['editAd']) {
+                          Navigator.of(context)
+                              .pushNamed(EditAdScreen.routeName, arguments: {
+                            'chosenCat': pushedArguments['chosenCat'],
+                            'chosenSubCat':
+                            pushedArguments['chosenCat'].subCategory[i],
+                          });
+                        } else {
+                          Navigator.of(context).pushNamed(
+                              ProductsByCategoryScreen.routeName,
+                              arguments: {
+                                'chosenCat': pushedArguments['chosenCat'],
+                                'chosenSubCat':
+                                pushedArguments['chosenCat'].subCategory[i],
+                              });
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            if(pushedArguments['chosenCat'].subCategory[i].picture != null)
+                              Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Image.network(
+                                pushedArguments['chosenCat'].subCategory[i].picture,
+                                width: 64,
+                                errorBuilder: (context, error, stackTrace) => Icon(
+                                  Icons.warning_amber_rounded,
+                                  size: 64,
+                                ),
+                              ),
                             ),
-                          ),
-                        )
-                            : null,
-                        title: Text(pushedArguments['chosenCat'].subCategory[i].name),
+                            Expanded(child: Text(pushedArguments['chosenCat'].subCategory[i].name)),
+                          ],
+                        ),
                       ),
                     )
                 );

@@ -35,16 +35,16 @@ class AllCategoriesScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-        child: GridView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child: ListView.builder(
           itemCount: allCategories.length,
-          gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            childAspectRatio: 1.5,
-          ),
+          // gridDelegate:
+          // SliverGridDelegateWithFixedCrossAxisCount(
+          //   crossAxisCount: 1,
+          //   crossAxisSpacing: 20,
+          //   mainAxisSpacing: 20,
+          //   childAspectRatio: 1.5,
+          // ),
           itemBuilder: (ctx, i) {
             switch (allCategories[i].id) {
               case '4':
@@ -86,20 +86,21 @@ class AllCategoriesScreen extends StatelessWidget {
               default:
                 catIcon = Image.asset('assets/images/category.png');
             }
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed(
-                  SubCategoriesScreen.routeName,
-                  arguments: {
-                    'newAd':  true, //pushedArguments['newAd'],
-                    'editAd': false, //pushedArguments['editAd'],
-                    'chosenCat': allCategories[i]
-                  },
-                );
-              },
-              child: Card(
-                elevation: 6.0,
+            return Card(
+              elevation: 6.0,
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    SubCategoriesScreen.routeName,
+                    arguments: {
+                      'newAd':  true, //pushedArguments['newAd'],
+                      'editAd': false, //pushedArguments['editAd'],
+                      'chosenCat': allCategories[i]
+                    },
+                  );
+                },
                 child: Container(
+                  padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0)
                   ),

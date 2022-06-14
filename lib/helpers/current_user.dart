@@ -17,7 +17,7 @@ class CurrentUser with ChangeNotifier {
   //static Location location = Location(name: 'Kuwait');
   static Location location = Location(name: AppConfig.adCountryName);
   static Location prodLocation = Location();
-  static bool showUpdateAlert = true;
+  static bool showUpdateAlert = false;
   static TextDirection textDirection = language == 'English' ? TextDirection.ltr : TextDirection.rtl;
 
   static Future initialize() async {
